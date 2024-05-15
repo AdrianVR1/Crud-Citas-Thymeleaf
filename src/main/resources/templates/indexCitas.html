@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Listado de Citas</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Logo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <!-- Listados dropdown -->
+            <li class="nav-item dropdown"><a
+                    class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                    role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false"> Listados </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/listadoPacientes">Listado Pacientes</a>
+                    <a class="dropdown-item" href="/listadoDoctor">Listado Doctores</a>
+                    <a class="dropdown-item" href="/listadoEspecialidad">Listado Especialidades</a>
+                </div></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h2>Listado de Citas</h2>
+    <div class="container mt-4">
+        <a class="btn btn-primary" th:href="@{/nuevaCita}">Nuevo</a>
+
+        <form class="form-inline mb-3" th:action="@{/listadoCita}">
+            <div class="form-group mr-2">
+                <label>Filtro:</label>
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="text" name="buscarCita" class="form-control"
+                       id="buscarCita" th:value="${buscarCita}"
+                       placeholder="¿Qué quieres buscar?"> <input
+                    type="submit" class="btn btn-info" value="buscar">
+            </div>
+        </form>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Motivo</th>
+                <th>Observaciones</th>
+                <th>Nombre Paciente</th>
+                <th>Nombre Doctor</th>
+                <th>Especialidad</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cit:${listadoCit}">
+                <td th:text="${cit.idcitas}"></td>
+                <td th:text="${#dates.format(cit.fecha, 'yyyy-MM-dd')}"></td>
+                <td th:text="${cit.motivo}"></td>
+                <td th:text="${cit.observaciones}"></td>
+                <td th:text="${cit.paciente.nombre}"></td>
+                <td th:text="${cit.doctor.nombre}"></td>
+                <td th:text="${cit.especialidad.nombre}"></td>
+                <td>
+                    <a th:href="@{/editarcita/} + ${cit.idcitas}" class="btn btn-warning"> Editar </a>
+                    <a th:href="@{/borrarcita/} + ${cit.idcitas}"
+                       class="btn btn-danger"
+                       onclick="return confirm('¿Estás seguro de que deseas borrar esta Cita?');">
+                        Borrar
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Nuevo Cita</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Nueva Cita</h2>
+    <form th:action="@{/guardarcit}" th:object="${cita}" method="post">
+
+        <p hidden>
+            <input type="text" th:field="*{idcitas}" readonly="readonly">
+        </p>
+
+        <div class="form-group">
+            <label>Fecha:</label>
+            <input type="date" class="form-control col-sm-6" th:field="*{fecha}" placeholder="Ingrese la Fecha">
+            <p th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}" class="text-danger"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Motivo:</label>
+            <input type="text" class="form-control col-sm-6" th:field="*{motivo}" placeholder="Ingrese su Motivo">
+            <p th:if="${#fields.hasErrors('motivo')}" th:errors="*{motivo}" class="text-danger"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Observaciones:</label>
+            <input type="text" class="form-control col-sm-6" th:field="*{observaciones}" placeholder="Ingrese su Observacion">
+            <p th:if="${#fields.hasErrors('observaciones')}" th:errors="*{observaciones}" class="text-danger"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Selecciona un Paciente:</label><br>
+            <select class="form-control col-sm-6" th:field="*{paciente}">
+                <option th:each="p:${listadoPac}"
+                        th:value = "${p.idpacientes}"
+                        th:text = "${p.nombre}"
+                />
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Selecciona un Doctor:</label><br>
+            <select class="form-control col-sm-6" th:field="*{doctor}">
+                <option th:each="d:${listadoDoc}"
+                        th:value = "${d.iddoctores}"
+                        th:text = "${d.nombre}"
+                />
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Selecciona una Especialidad:</label><br>
+            <select class="form-control col-sm-6" th:field="*{especialidad}">
+                <option th:each="d:${listadoEsp}"
+                        th:value = "${d.idespecialidad}"
+                        th:text = "${d.nombre}"
+                />
+            </select>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Listado de Pacientes</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Logo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <!-- Listados dropdown -->
+            <li class="nav-item dropdown"><a
+                    class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                    role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false"> Listados </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/listadoDoctor">Listado Doctores</a>
+                    <a class="dropdown-item" href="/listadoEspecialidad">Listado Especialidades</a>
+                    <a class="dropdown-item" href="/listadoCita">Listado Citas</a>
+                </div></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h2>Listado de Pacientes</h2>
+    <div class="container mt-4">
+        <a class="btn btn-primary mb-3" th:href="@{/nuevo}">Nuevo</a>
+
+        <!-- Filter form -->
+        <form class="form-inline mb-3" th:action="@{/listadoPacientes}">
+            <div class="form-group mr-2">
+                <label>Filtro:</label>
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="text" name="palabraClave" class="form-control"
+                       id="palabraClave" th:value="${palabraClave}"
+                       placeholder="¿Qué quieres buscar?"> <input
+                    type="submit" class="btn btn-info" value="buscar">
+            </div>
+        </form>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Fecha</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pac:${listado}">
+            <td th:text="${pac.idpacientes}"></td>
+            <td th:text="${pac.nombre}"></td>
+            <td th:text="${pac.apellido}"></td>
+            <td th:text="${#dates.format(pac.fechanac, 'yyyy-MM-dd')}"></td>
+            <td th:text="${pac.direccion}"></td>
+            <td th:text="${pac.telefono}"></td>
+            <td>
+                <a th:href="@{/editar/} + ${pac.idpacientes}" class="btn btn-warning"> Editar </a>
+                <a th:href="@{/borrar/} + ${pac.idpacientes}"
+                   class="btn btn-danger"
+                   onclick="return confirm('¿Estás seguro de que deseas borrar este paciente?');">
+                    Borrar
+                </a>
+
+            </td>
+
+        </tr>
+        </tbody>
+        </table>
+    </div>
+   </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

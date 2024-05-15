@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <!-- Add the bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Logo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <!-- Listados dropdown -->
+            <li class="nav-item dropdown"><a
+                    class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                    role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false"> Listados </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/listadoPacientes">Listado Pacientes</a>
+                    <a class="dropdown-item" href="/listadoDoctor">Listado Doctores</a>
+                    <a class="dropdown-item" href="/listadoEspecialidad">Listado Especialidades</a>
+                    <a class="dropdown-item" href="/listadoCita">Listado Citas</a>
+                </div></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h1>Welcome to our website!</h1>
+    <p>This is the welcome page of our website.</p>
+</div>
+<!-- Add the bootstrap JS link here -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
